@@ -128,6 +128,17 @@ int main()
   std::cout << "Minimized F:\t" << tr.fvec.transpose() << std::endl;
   std::cout << "f-eval, j-eval:\t" << tr.nfev << ", " << tr.njev << std::endl;
   std::cout << "solver (us) " << dt << std::endl << "-- --\n";
+  
+  // LM
+  // initial guess
+  x << -1, 1, -1, 1, 2, 2;
+  LevenbergMarquardt<cdc_functor> lm(prob1);
+  info = lm.minimize(x);
+
+  std::cout << "solver status: " << info << std::endl;
+  std::cout << "solution:\t" << x.transpose() << std::endl;
+  std::cout << "Minimized F:\t" << lm.fvec.transpose() << std::endl;
+  std::cout << "f-eval, j-eval:\t" << lm.nfev << ", " << lm.njev << std::endl;
 
   return 0;
   
